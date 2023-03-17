@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const LoginPage = () => {
   return (
-    <form onSubmit={ e => e.preventDefault()}
+    <form onSubmit={ (e) => e.preventDefault()}
     className='w-1/4 h-60 mx-auto mt-40'
     >
 
