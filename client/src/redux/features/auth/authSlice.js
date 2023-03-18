@@ -17,7 +17,7 @@ export const registerUser = createAsyncThunk(
                 password,
             })
             if (data.token) {
-                windows.localStorage.setItem('token', data.token)
+                window.localStorage.setItem('token', data.token)
             }
             return data
         } catch (error) {
@@ -35,13 +35,13 @@ export const authSlice = createSlice ({
             state.isLoading = true
             state.status = null
         },
-        [registerUser.fulfilled]: (state) => {
+        [registerUser.fulfilled]: (state, action) => {
             state.isLoading = false
             state.status = action.payload.message
             state.user = action.payload.user
             state.token = action.payload.token
         },
-        [registerUser.rejected]: (state) => {
+        [registerUser.rejected]: (state, action) => {
             state.status = action.payload.message
             state.isLoading = false
         },
