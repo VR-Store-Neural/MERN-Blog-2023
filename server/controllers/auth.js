@@ -10,7 +10,7 @@ export const register = async (req, res) => {
     const isUsed = await User.findOne({ username });
 
     if (isUsed) {
-      return res.status(402).json({
+      return res.json({
         message: "Цей username вже зайнятий",
       });
     }
@@ -34,6 +34,7 @@ export const register = async (req, res) => {
     res.json({
       newUser,
       message: "Регістрація успішна",
+      token,
     });
   } catch (error) {
     res.json({ message: "Помилка при створенні користувача" });
