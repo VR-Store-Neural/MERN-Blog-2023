@@ -80,10 +80,11 @@ export const login = async (req, res) => {
   }
 };
 
+
 // Get me
 export const getMe = async (req, res) => {
   try {
-    const user = await User.findOne(req.userId);
+    const user = await User.findById(req.userId);
 
     if (!user) {
       return res.json({
@@ -91,12 +92,12 @@ export const getMe = async (req, res) => {
       });
     }
 
-    const tokent = jwt.sign(
+    const token = jwt.sign(
       {
         id: user._id,
       },
       process.env.JWT_SECRET,
-      { expires: "30d" }
+      { expiresIn: "30d" }
     );
 
     res.json({
