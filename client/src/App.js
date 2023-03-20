@@ -1,5 +1,6 @@
 import { Layout } from "./componets/Layout.jsx";
 import { Routes, Route } from "react-router-dom";
+
 import { MainPage } from "./pages/MainPage";
 import { PostsPage } from "./pages/PostsPage";
 import { PostPage } from "./pages/PostPage";
@@ -19,6 +20,7 @@ function App() {
   useEffect(() => {
     dispatch(getMe())
   }, [dispatch])
+  
   return (
     <Layout>
       <Routes>

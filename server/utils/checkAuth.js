@@ -1,4 +1,4 @@
-import  Jwt  from 'jsonwebtoken'
+import  jwt  from 'jsonwebtoken' // вот здесь была ошибка(регистр буквы "j" был верхний)
 
 // req.headers.authorization = 'Bearer 723hd3ggd2uddjasd283hh'
 export const checkAuth = (req, res, next) => {
