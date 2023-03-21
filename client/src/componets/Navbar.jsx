@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { checkIsAuth, logout } from '../redux/features/auth/authSlice'
+import { checkIsAuth, logout } from '../redux/features/auth/authSlice.js'
 import { toast } from 'react-toastify'
 
 export const Navbar = () => {
@@ -21,7 +21,7 @@ export const Navbar = () => {
     return (
         <div className='flex py-4 justify-between items-center'>
             <span className='flex justify-center items-center w-6 h-6 bg-gray-600 text-xs text-white rounded-sm'>
-                E
+                Biksa
             </span>
 
             {isAuth && (

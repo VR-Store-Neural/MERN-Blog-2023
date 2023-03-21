@@ -2,8 +2,10 @@ import express from 'express'
 import mongoose from 'mongoose' 
 import dotenv from 'dotenv' 
 import cors from 'cors' 
+import fileUpload from 'express-fileupload'
 
 import authRoute from './routes/auth.js'
+import postRoute from './routes/posts.js'
 
 const app = express() 
 dotenv.config() 
@@ -16,11 +18,14 @@ const DB_NAME = process.env.DB_NAME
 
 // Middleware - функция, которая расширяет функции express
 app.use(cors()) 
+app.use(fileUpload())
 app.use(express.json()) 
+app.use(express('uploads'))
 
 // Routes
 // http://localhost:3002
 app.use('/api/auth', authRoute)
+app.use('/api/posts', postRoute)
 
 
 // Объявляет функцию start, которая асинхронно запускает сервер Express и подключается к базе данных MongoDB при помощи Mongoose.
