@@ -10,7 +10,7 @@ export const createPost = async (req, res) => {
         const user = await User.findById(req.userId)
 
         if (req.files) {
-            let fileName = Date.now().toString + req.files.image.name
+            let fileName = Date.now().toString() + req.files.image.name
             const __dirname = dirname(fileURLToPath(import.meta.url))
             req.files.image.mv(path.join(__dirname, '..', 'uploads', fileName))
 
@@ -47,3 +47,31 @@ export const createPost = async (req, res) => {
         res.json({ message: 'Щось пішло не за планом.'})
     }
 }
+
+// Get All Posts
+export const getAll = async (req, res) => {
+    try {
+        const posts = await Post.find().sort('-createdAt')
+        const popularPosts = await Post.find().limit(5).sort('-views')
+        if (!posts) {
+            return res.json({ message: 'Постів немає'})
+        }
+
+        res.json({ posts, popularPosts })
+    } catch (error) {
+        res.json({ message:'Щось пішло не за планом' })
+    }
+}
+
+
+// Get All Posts
+export const getById = async (req, res) => {
+    try {
+        const post = await Post.findOneAndUpdate(req.params.id, {
+            $inc: {views: 1},
+        })
+        res.json(post)
+    } catch (error) {
+        res.json({ message:'Щось пішло не за планом' })
+    }
+} 

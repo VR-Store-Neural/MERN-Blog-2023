@@ -20,7 +20,9 @@ const DB_NAME = process.env.DB_NAME
 app.use(cors()) 
 app.use(fileUpload())
 app.use(express.json()) 
-app.use(express('uploads'))
+// app.use(express('uploads'))
+// app.use('/uploads', express.static('uploads'));
+app.use(express.static('uploads')); // теперь картинки загружаются на главную страничку
 
 // Routes
 // http://localhost:3002
