@@ -1,74 +1,30 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { AiFillEye, AiOutlineMessage } from "react-icons/ai";
-import Moment from "react-moment";
-import { useParams, Link } from "react-router-dom";
+import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { PostItem } from '../componets/PostItem'
 import axios from '../utils/axios'
 
 export const PostsPage = () => {
-  const [post, setPost] = useState(null)
-  const params = useParams()
+    const [posts, setPosts] = useState([])
 
-  const fetchPost = useCallback(async() => {
-    const { data } = await axios.get(`/posts/${params.id}`)
-    setPost(data)
-  }, [params.id])
+    const fetchMyPosts = async () => {
+        try {
+            const { data } = await axios.get('/posts/user/me')
+            setPosts(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-  useEffect(() => {
-    fetchPost()
-  }, [fetchPost])
+    useEffect(() => {
+        fetchMyPosts()
+    }, [])
 
-  if (!post) {
     return (
-      <div className="text-xl text-center text-white py-10">
-        Постів не імає.
-      </div>
+        <div className='w-1/2 mx-auto py-10 flex flex-col gap-10'>
+            {posts?.map((post, idx) => (
+                <PostItem post={post} key={idx} />
+            ))}
+        </div>
     )
-  }
-
-  
-  return (
-    <div>
-      <button className="flex justify-center items-center bg-gray-600 text-xs text-whit rounded-sm py-2 px-4">
-        <Link className="flex" to={'/'}>Main page</Link>
-      </button>
-
-      <div className="flex gap-10 py-8">
-        <div className="w-2/3">
-          <div className="flex flex-col basis-1/4 flex-grow">
-            <div
-              className={
-                post?.imgUrl ? "flex rounded-sm h80" : "flex rounded-sm"
-              }
-            >
-              {post?.imgUrl && (
-                <img
-                  src={`http://localhost:3002/${post.imgUrl}`}
-                  alt="img"
-                  className="object-cover w-full"
-                />
-              )}
-            </div>
-          </div>
-          <div className="flex justify-between items-center pt-2">
-        <div className="text-xs text-white opacity-50">{post.username}</div>
-        <div className="text-xs text-white opacity-50">
-          <Moment date={post.createdAt} format="D MMM YYYY" />
-        </div>
-      </div>
-      <div className="text-white text-xl">{post.title}</div>
-      <p className="text-wite opacity-60 text-xs pt-4">{post.text}</p>
-
-      <div className="flex gap-3 item-center mt-2">
-        <button className="flex items-center justify-center gap-2 text-xs text-white opacity-50">
-          <AiFillEye /> <span>{post.views}</span>
-        </button>
-        <button className="flex items-center justify-center gap-2 text-xs text-white opacity-50">
-          <AiOutlineMessage /> <span>{post.comments?.length || 0}</span>
-        </button>
-      </div>
-        </div>
-        <div className="w-1/3">COMMENTS</div>
-      </div>
-    </div>
-  );
-};
+}
