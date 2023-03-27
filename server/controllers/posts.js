@@ -79,7 +79,7 @@ export const getById = async (req, res) => {
 // Get All Posts
 export const getMyPosts = async (req, res) => {
     try {
-        const user = await User.findById(req.userId)
+        const user = await User.findByIdA(req.userId)
         const list = await Promise.all(
             user.posts.map((post) => {
                 return Post.findById(post._id)
