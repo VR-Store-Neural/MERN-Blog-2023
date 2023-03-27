@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { AiFillEye, AiOutlineMessage } from "react-icons/ai";
 import Moment from "react-moment";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from '../utils/axios'
 
 export const PostsPage = () => {
@@ -29,7 +29,7 @@ export const PostsPage = () => {
   return (
     <div>
       <button className="flex justify-center items-center bg-gray-600 text-xs text-whit rounded-sm py-2 px-4">
-        Back
+        <Link className="flex" to={'/'}>Main page</Link>
       </button>
 
       <div className="flex gap-10 py-8">
