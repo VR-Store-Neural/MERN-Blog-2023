@@ -32,7 +32,7 @@ export const AddPostPage = () => {
     <form className='w-1/3 mx-auto py-10'
     onSubmit={ (e) => e.preventDefault()}
     >
-      <label className='text-gray-300 py-2 bg-gray-600 text-xs nt-2 flex items-center justify-center border-2 border-dotted cursor-pointer'>
+       <label className='text-gray-300 py-2 bg-gray-600 text-xs nt-2 flex items-center justify-center border-2 border-dotted cursor-pointer'>
         Додати зображення:
         <input 
         type="file" 
@@ -41,7 +41,7 @@ export const AddPostPage = () => {
           /> 
       </label>
       <div className='flex object-cover py-2'>
-        {image && (<img src={URL.createObjectURL(image)} alt='image' />)}
+        {image && (<img src={URL.createObjectURL(image)} alt='' />)}
       </div>
 
       <label className='text-xs text-white opacity-70'>
