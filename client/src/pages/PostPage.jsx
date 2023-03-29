@@ -11,7 +11,7 @@ import {
 } from "react-icons/ai";
 import Moment from "react-moment";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
+import { toast } from 'react-toastify'
 import axios from "../utils/axios";
 import { removePost } from "../redux/features/post/postSlice";
 
@@ -26,6 +26,7 @@ export const PostPage = () => {
     try {
       dispatch(removePost(params.id));
       navigate("/posts");
+      toast('Пост було видалено')
     } catch (error) {
       console.log(error);
     }
@@ -61,10 +62,11 @@ export const PostPage = () => {
                 <img
                   src={`http://localhost:3002/${post.imgUrl}`}
                   alt="img"
-                  className="object-cover w-full"
+                  className="object-cover h-full"
                 />
               )}
             </div>
+            
           </div>
 
           <div className="flex justify-between items-center pt-2">

@@ -1,26 +1,37 @@
-import { Router } from 'express'
-import { createPost, getAll, getById, getMyPosts, removePost } from '../controllers/posts.js'
-import { checkAuth } from '../utils/checkAuth.js'
-const router = new Router()
+import { Router } from "express";
+import {
+  createPost,
+  getAll,
+  getById,
+  getMyPosts,
+  removePost,
+  updatePost,
+} from "../controllers/posts.js";
+import { checkAuth } from "../utils/checkAuth.js";
+const router = new Router();
 
 // Create Post
 // http://localhost:3002/api/posts
-router.post('/',checkAuth, createPost)
+router.post("/", checkAuth, createPost);
 
 // Get All Posts
 //http://localhost:3002/api/posts
-router.get('/', getAll)
+router.get("/", getAll);
 
-// Get By Id
+// Get Post By Id
 //http://localhost:3002/api/posts/:id
-router.get('/:id', getById)
+router.get("/:id", getById);
+
+// Update post
+//http://localhost:3002/api/posts/:id
+router.put("/:id", checkAuth, updatePost);
 
 // Get My Posts
 //http://localhost:3002/api/posts/user/me
-router.get('/user/me', checkAuth, getMyPosts)
+router.get("/user/me", checkAuth, getMyPosts);
 
 // Remove Post
 // http://localhost:3002/api/posts/:id
-router.delete('/:id', checkAuth, removePost)
+router.delete("/:id", checkAuth, removePost);
 
-export default router 
+export default router;

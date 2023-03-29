@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../utils/axios'
 
+
 const initialState = {
     user: null,
     token: null,
@@ -87,7 +88,7 @@ export const authSlice = createSlice({
         },
         [loginUser.fulfilled]: (state, action) => {
             state.isLoading = false
-            state.status = action.payload.message
+            state.status = action.payload.message 
             state.user = action.payload.user
             state.token = action.payload.token
         },
