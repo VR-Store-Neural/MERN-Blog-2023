@@ -17,7 +17,7 @@ export const EditPostPage = () => {
   const params = useParams();
 
   const fetchPost = useCallback(async () => {
-    const { data } = await axios.get(`/post/${params.id}/edit`);
+    const { data } = await axios.get(`/posts/${params.id}`);
     setTitle(data.title);
     setText(data.text);
     setOldImage(data.imgUrl);
