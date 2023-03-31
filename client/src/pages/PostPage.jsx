@@ -10,23 +10,25 @@ import {
   AiFillDelete,
 } from "react-icons/ai";
 import Moment from "react-moment";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify'
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import axios from "../utils/axios";
 import { removePost } from "../redux/features/post/postSlice";
 
 export const PostPage = () => {
   const [post, setPost] = useState(null);
+
   const { user } = useSelector((state) => state.auth);
-  const params = useParams();
   const navigate = useNavigate();
+  const params = useParams();
   const dispatch = useDispatch();
 
   const removePostHandler = () => {
     try {
       dispatch(removePost(params.id));
+      toast("Пост был удален");
       navigate("/posts");
-      toast('Пост було видалено')
     } catch (error) {
       console.log(error);
     }
@@ -43,13 +45,17 @@ export const PostPage = () => {
 
   if (!post) {
     return (
-      <div className="text-xl text-center text-white py-10">
-        Завантаження...
-      </div>
+      <div className="text-xl text-center text-white py-10">Загрузка...</div>
     );
   }
   return (
     <div>
+      <button className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4">
+        <Link className="flex" to={"/"}>
+          Назад
+        </Link>
+      </button>
+
       <div className="flex gap-10 py-8">
         <div className="w-2/3">
           <div className="flex flex-col basis-1/4 flex-grow">
@@ -62,11 +68,10 @@ export const PostPage = () => {
                 <img
                   src={`http://localhost:3002/${post.imgUrl}`}
                   alt="img"
-                  className="object-cover h-full"
+                  className="object-cover w-full"
                 />
               )}
             </div>
-            
           </div>
 
           <div className="flex justify-between items-center pt-2">

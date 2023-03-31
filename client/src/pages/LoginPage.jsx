@@ -9,17 +9,17 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('')
   const {status} = useSelector((state) => state.auth)
   const isAuth = useSelector(checkIsAuth)
-  console.log(status)  
+  console.log(status)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-      if (status) { 
-          
-          toast(status) 
-      }
-      if (isAuth) navigate('/')
-      }, [status, isAuth, navigate]) 
+    if (status) {
+        toast(status)
+        
+    }
+    if (isAuth) navigate('/')
+    }, [status, isAuth, navigate])  
 
   const handleSubmit = () => {
     try {

@@ -91,6 +91,7 @@ export const authSlice = createSlice({
             state.status = action.payload.message 
             state.user = action.payload.user
             state.token = action.payload.token
+            
         },
         [loginUser.rejectWithValue]: (state, action) => {
             state.status = action.payload.message

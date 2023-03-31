@@ -117,16 +117,16 @@ export const updatePost = async (req, res) => {
       let fileName = Date.now().toString() + req.files.image.name;
       const __dirname = dirname(fileURLToPath(import.meta.url));
       req.files.image.mv(path.join(__dirname, "..", "uploads", fileName));
-      post.imgUrl = fileName || '';
+      post.imgUrl = fileName || "";
     }
 
-    post.title = title 
-    post.text = text
+    post.title = title;
+    post.text = text;
 
-    await post.save()
+    await post.save();
 
     res.json(post);
   } catch (error) {
-    res.json({ message: "Щось пішло не по плану." });
+    res.json({ message: "Что-то пошло не так." });
   }
 };

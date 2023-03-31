@@ -1,8 +1,8 @@
 import React from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePost } from "../redux/features/post/postSlice";
-import { useEffect, useState, useCallback } from "react";
 
 import axios from "../utils/axios";
 
@@ -17,7 +17,7 @@ export const EditPostPage = () => {
   const params = useParams();
 
   const fetchPost = useCallback(async () => {
-    const { data } = await axios.get(`/posts/${params.id}`);
+    const { data } = await axios.get(`/post/${params.id}/edit`);
     setTitle(data.title);
     setText(data.text);
     setOldImage(data.imgUrl);
@@ -48,8 +48,8 @@ export const EditPostPage = () => {
 
   return (
     <form className="w-1/3 mx-auto py-10" onSubmit={(e) => e.preventDefault()}>
-      <label className="text-gray-300 py-2 bg-gray-600 text-xs nt-2 flex items-center justify-center border-2 border-dotted cursor-pointer">
-        Додати зображення:
+      <label className="text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer">
+        Прикрепить изорбажение:
         <input
           type="file"
           className="hidden"
@@ -91,17 +91,17 @@ export const EditPostPage = () => {
 
       <div className="flex gap-8 items-center justify-center mt-4">
         <button
-          className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
           onClick={submitHandler}
+          className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4"
         >
-          Додати
+          Обновить
         </button>
 
         <button
-          className="flex justify-center items-center bg-red-900 text-xs text-white rounded-sm py-2 px-4"
           onClick={clearFormHandler}
+          className="flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4"
         >
-          Відміна
+          Отменить
         </button>
       </div>
     </form>
