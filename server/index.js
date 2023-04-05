@@ -6,6 +6,7 @@ import fileUpload from 'express-fileupload'
 
 import authRoute from './routes/auth.js'
 import postRoute from './routes/posts.js'
+import commentRoute from './routes/comments.js'
 
 const app = express() 
 dotenv.config() 
@@ -28,6 +29,7 @@ app.use(express.static('uploads')); // теперь картинки загру�
 // http://localhost:3002
 app.use('/api/auth', authRoute)
 app.use('/api/posts', postRoute)
+app.use('/api/comments', commentRoute)
 
 
 // Объявляет функцию start, которая асинхронно запускает сервер Express и подключается к базе данных MongoDB при помощи Mongoose.
